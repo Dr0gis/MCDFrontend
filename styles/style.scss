@@ -1,0 +1,117 @@
+$white: #ffffff;
+$blue: #1782dd;
+$separator: #cccccc;
+$disable: #eeeeee;
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: $blue;
+
+    .box-tabs {
+        border-radius: 50px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: $white;
+
+        .titles {
+            display: flex;
+            border-radius: 50px 50px 0px 0px;
+
+            .title {
+                width: 100%;
+                padding: 20px;
+                text-align: center;
+                border-bottom: 1px solid $separator;
+                background-color: $disable;
+                transition: 0.5s all;
+                cursor: pointer;
+
+                &:first-child {
+                    border-radius: 50px 0px 0px 0px;
+                    border-right: 1px solid $separator;
+                }
+
+                &:last-child {
+                    border-radius: 0px 50px 0px 0px;
+                    border-left: 1px solid $separator;
+                }
+            }
+
+            .active {
+                background-color: $white;
+                border-color: $white!important;
+                cursor: default;
+            }
+        }
+
+        .contents {
+            padding: 40px;
+            padding-top: 20px;
+            padding-bottom: 10px;
+
+            .content  {
+                transition: 0.5s all;
+
+                form {
+                    display: flex;
+                    flex-direction: column;
+
+                    input, button {
+                        width: 300px;
+                        padding: 10px;
+                        margin: 10px;
+                        background-color: $white;
+                        border: 1px solid $separator;
+                    }
+
+                    button {
+                        background-color: $blue;
+                        color: $white;
+                        border: 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    .box-content {
+        border-radius: 50px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background-color: $white;
+        width: 1000px;
+        min-height: 800px;
+
+        .titles {
+            display: flex;
+            border-radius: 50px 50px 0px 0px;
+
+            .title {
+                width: 100%;
+                padding: 20px;
+                text-align: center;
+                border-bottom: 1px solid $separator;
+                background-color: $disable;
+                transition: 0.5s all;
+                cursor: pointer;
+
+                &:first-child {
+                    border-radius: 50px 0px 0px 0px;
+                    border-right: 1px solid $separator;
+                }
+
+                &:last-child {
+                    border-radius: 0px 50px 0px 0px;
+                    border-left: 1px solid $separator;
+                }
+            }
+
+            .active {
+                background-color: $white;
+                border-color: $white!important;
+                cursor: default;
+            }
+        }
+    }
+}

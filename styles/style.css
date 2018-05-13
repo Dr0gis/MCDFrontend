@@ -1,0 +1,113 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #1782dd;
+}
+
+.main .box-tabs {
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #ffffff;
+}
+
+.main .box-tabs .titles {
+  display: flex;
+  border-radius: 50px 50px 0px 0px;
+}
+
+.main .box-tabs .titles .title {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #cccccc;
+  background-color: #eeeeee;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+.main .box-tabs .titles .title:first-child {
+  border-radius: 50px 0px 0px 0px;
+  border-right: 1px solid #cccccc;
+}
+
+.main .box-tabs .titles .title:last-child {
+  border-radius: 0px 50px 0px 0px;
+  border-left: 1px solid #cccccc;
+}
+
+.main .box-tabs .titles .active {
+  background-color: #ffffff;
+  border-color: #ffffff !important;
+  cursor: default;
+}
+
+.main .box-tabs .contents {
+  padding: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.main .box-tabs .contents .content {
+  transition: 0.5s all;
+}
+
+.main .box-tabs .contents .content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.main .box-tabs .contents .content form input, .main .box-tabs .contents .content form button {
+  width: 300px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.main .box-tabs .contents .content form button {
+  background-color: #1782dd;
+  color: #ffffff;
+  border: 0px;
+}
+
+.main .box-content {
+  border-radius: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #ffffff;
+  width: 1000px;
+  min-height: 800px;
+}
+
+.main .box-content .titles {
+  display: flex;
+  border-radius: 50px 50px 0px 0px;
+}
+
+.main .box-content .titles .title {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #cccccc;
+  background-color: #eeeeee;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+
+.main .box-content .titles .title:first-child {
+  border-radius: 50px 0px 0px 0px;
+  border-right: 1px solid #cccccc;
+}
+
+.main .box-content .titles .title:last-child {
+  border-radius: 0px 50px 0px 0px;
+  border-left: 1px solid #cccccc;
+}
+
+.main .box-content .titles .active {
+  background-color: #ffffff;
+  border-color: #ffffff !important;
+  cursor: default;
+}
+/*# sourceMappingURL=style.css.map */

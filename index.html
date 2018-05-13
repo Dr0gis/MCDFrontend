@@ -1,0 +1,41 @@
+<head>
+    <meta charset="utf-8">
+    <title>MCD</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <div class="main">
+        <div class="box-tabs" id="box-reg-auth" v-if="isShow">
+            <div class="titles">
+                <div @click="setActive" index="0" :class="activeClass[0]" id="auth-title">Authorization</div>
+                <div @click="setActive" index="1" :class="activeClass[1]" id="auth-title">Registration</div>
+            </div>
+            <div class="contents">
+                <div v-show="activeClass[0].active">
+                    <authorization></authorization>
+                </div>
+                <div v-show="activeClass[1].active">
+                    <registration></registration>
+                </div>
+            </div>
+        </div>
+        <div class="box-content" id="main-content" v-if="isShow">
+            <div class="titles">
+                <div @click="logOut" class="title">Log out</div>
+                <div class="title active">Main</div>
+                <div class="title">Profile</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="scripts/script.js"></script>
+</body>
