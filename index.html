@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 </head>
 
 <body>
@@ -25,11 +27,182 @@
         </div>
         <div class="box-content" id="main-content" v-if="isShow">
             <div class="titles">
-                <div @click="logOut" class="title">Log out</div>
-                <div class="title active">Main</div>
-                <div class="title">Profile</div>
+                <div @click="logOut" :class="{title: true, active: 0 == indexActiveTitle}">Log out</div>
+                <div @click="showContent" :class="{title: true, active: 1 == indexActiveTitle}">Main</div>
+                <div @click="showProfile" :class="{title: true, active: 2 == indexActiveTitle}">Profile</div>
+            </div>
+            <div class="content" v-if="isContentShow">
+                <div class="users-list">
+                    <div class="title">Users list</div>
+                    <input type="search" placeholder="Search">
+                    <list></list>
+                </div>
+                <div class="zone-data" v-if="isZoneDataShow">
+                    <div class="title">Forbidden zone</div>
+                    <div class="zone">
+                        <div class="zone-map">
+                            <img id="zone-img" src="https://maps.googleapis.com/maps/api/staticmap?center=50.015271,36.227863&zoom=15&size=300x300&path=weight:3%7Ccolor:blue%7Cenc:{coaHnetiVjM??_SkM??~R&key=AIzaSyAfdWr8eiluFFBNtPGeMcv3CnLAOk76Wgs">
+                        </div>
+                        <div class="zone-points">
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                            <div class="point"></div>
+                        </div>
+                        <div class="point-data">
+                            <span>X</span>
+                            <input type="text" placeholder="X">
+                            <span>Y</span>
+                            <input type="text" placeholder="Y">
+                            <span>Height</span>
+                            <input type="text" placeholder="Height">
+                        </div>
+                    </div>
+                </div>
+                <div class="events-list" v-if="isEventListShow">
+                    <div class="title">Events</div>
+                    <div class="list">
+                        <div class="item">
+                            <div class="user">User: <p id="event-user">user@mail.com</p></div>
+                            <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
+                            <div class="zone">
+                                Zone: 
+                                <div class="zone-x">X: <p id="event-zone-x">10</p></div>
+                                <div class="zone-y">Y: <p id="event-zone-x">20</p></div>
+                                <div class="zone-height">Height: <p id="event-zone-height">100m</p></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="user">User: <p id="event-user">user1@mail.com</p></div>
+                            <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
+                            <div class="zone">
+                                Zone: 
+                                <div class="zone-x">X: <p id="event-zone-x">40</p></div>
+                                <div class="zone-y">Y: <p id="event-zone-x">50</p></div>
+                                <div class="zone-height">Height: <p id="event-zone-height">300m</p></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="user">User: <p id="event-user">user@mail.com</p></div>
+                            <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
+                            <div class="zone">
+                                Zone: 
+                                <div class="zone-x">X: <p id="event-zone-x">80</p></div>
+                                <div class="zone-y">Y: <p id="event-zone-x">80</p></div>
+                                <div class="zone-height">Height: <p id="event-zone-height">200m</p></div>
+                            </div>
+                        </div>
+                        <div class="item">
+                                <div class="user">User: <p id="event-user">user1@mail.com</p></div>
+                                <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
+                                <div class="zone">
+                                    Zone: 
+                                    <div class="zone-x">X: <p id="event-zone-x">10</p></div>
+                                    <div class="zone-y">Y: <p id="event-zone-x">20</p></div>
+                                    <div class="zone-height">Height: <p id="event-zone-height">100m</p></div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="user-data" v-if="isUserDataShow">
+
+                </div>
+            </div>
+            <div class="profile" v-if="isProfileShow">
+                <div class="admin-data">
+                    <img src="images/avatar-default-icon.png" height="300px">
+                    <div class="email">
+                        Email: <p id="admin-email">Email</p>
+                    </div>
+                    <div class="login">
+                        Login: <p id="admin-login">Login</p>
+                    </div>
+                </div>
+                <div class="drons-list">
+                    <div class="title">List drons</div>
+                    <div class="list">
+                        <div class="item">dron#0001</div>
+                        <div class="item">dron#0002</div>
+                        <div class="item">dron#0003</div>
+                    </div>
+                    <button>Add new dron</button>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="logo">
+        <img src="images/drone-icon.png" height="40px">
+        MCD
+    </div>
+    <div class="progress-bar" id="progress" v-if="isShow">
+        <div class="loader"></div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

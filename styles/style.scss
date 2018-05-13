@@ -1,14 +1,123 @@
 $white: #ffffff;
 $blue: #1782dd;
+$blue-hover: #2893ee;
+$red: #dc143c;
 $separator: #cccccc;
 $disable: #eeeeee;
+$disable-hover: #dddddd;
+$black-alpha: rgba(0,0,0,0.7);
+$blue-green-gradient: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+
+html {
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.progress-bar {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $black-alpha;
+    top: 0px;
+    left: 0px;
+
+    .loader,
+    .loader:after {
+        border-radius: 50%;
+        width: 10em;
+        height: 10em;
+    }
+
+    .loader {
+        margin: 60px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 1.1em solid rgba(255, 255, 255, 0.1);
+        border-right: 1.1em solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1.1em solid rgba(255, 255, 255, 0.1);
+        border-left: 1.1em solid $blue;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+    }
+
+    @-webkit-keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes load8 {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.logo {
+    position: absolute;
+    width: 200px;
+    top: 30px;
+    left: 50%;
+    margin-left: -100px;
+    text-align: center;
+    color: $white;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Acme', sans-serif;
+    font-style: unset;
+
+    img {
+        margin-right: 10px;
+    }
+}
 
 .main {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-color: $blue;
+    background-image: $blue-green-gradient;
+    padding-top: 60px;
 
     .box-tabs {
         border-radius: 50px;
@@ -27,6 +136,7 @@ $disable: #eeeeee;
                 background-color: $disable;
                 transition: 0.5s all;
                 cursor: pointer;
+                font-weight: 100;
 
                 &:first-child {
                     border-radius: 50px 0px 0px 0px;
@@ -37,12 +147,17 @@ $disable: #eeeeee;
                     border-radius: 0px 50px 0px 0px;
                     border-left: 1px solid $separator;
                 }
+
+                &:hover {
+                    background-color: $disable-hover;
+                }
             }
 
             .active {
-                background-color: $white;
+                background-color: $white!important;
                 border-color: $white!important;
                 cursor: default;
+                font-weight: 900;
             }
         }
 
@@ -70,6 +185,11 @@ $disable: #eeeeee;
                         background-color: $blue;
                         color: $white;
                         border: 0px;
+                        transition: 0.5s all;
+
+                        &:hover {
+                            background-color: $blue-hover;
+                        }
                     }
                 }
             }
@@ -80,8 +200,8 @@ $disable: #eeeeee;
         border-radius: 50px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         background-color: $white;
-        width: 1000px;
-        min-height: 800px;
+        width: 1200px;
+        height: 800px;
 
         .titles {
             display: flex;
@@ -92,9 +212,12 @@ $disable: #eeeeee;
                 padding: 20px;
                 text-align: center;
                 border-bottom: 1px solid $separator;
+                border-left: 1px solid $separator;
+                border-right: 1px solid $separator;
                 background-color: $disable;
                 transition: 0.5s all;
                 cursor: pointer;
+                font-weight: 100;
 
                 &:first-child {
                     border-radius: 50px 0px 0px 0px;
@@ -105,12 +228,291 @@ $disable: #eeeeee;
                     border-radius: 0px 50px 0px 0px;
                     border-left: 1px solid $separator;
                 }
+
+                &:hover {
+                    background-color: $disable-hover;
+                }
             }
 
             .active {
-                background-color: $white;
+                background-color: $white!important;
                 border-color: $white!important;
                 cursor: default;
+                font-weight: 900;
+            }
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            
+            .users-list {
+                width: 380px;
+                padding: 40px;
+
+                .title {
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                input {
+                    border: 1px solid $separator;
+                    padding: 10px;
+                    margin-bottom: 20px;
+                    display: block;
+                    width: 100%;
+                }
+
+                .list {
+                    outline: 1px solid $separator;
+                    height: 550px;
+                    overflow: auto;
+
+                    .item {
+                        padding: 20px;
+                        transition: 0.5s all;
+                        cursor: pointer;
+                        position: relative;
+
+                        &:hover {
+                            background-color: $blue;
+                            color: $white;
+                        }
+
+                        &:before {
+                            content: '';
+                            width: 0px;
+                            height: 100%;
+                            background-color: $white;
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+                            border-top: 1px solid $separator;
+                            border-bottom: 1px solid $separator;
+                            transition: 0.5s all;
+                        }
+                    }
+
+                    .active {
+                        background-color: $blue;
+                        color: $white;
+                        display: block;
+                        padding-left: 30px;
+
+                        &:before {
+                            width: 10px;
+                        }
+
+                        &:hover {
+                            padding-left: 35px;
+
+                            &:before {
+                                width: 15px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .zone-data {
+                width: 380px;
+                padding: 40px;
+
+                .title {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .zone {
+                    display: flex;
+                    height: 630px;
+                    width: 300px;
+                    padding-top: 10px;
+                    flex-direction: column;
+
+                    .zone-map {
+                        position: relative;
+                    }
+
+                    .zone-points {
+                        width: 300px;
+                        height: 300px;
+                        outline: 1px solid $separator;
+                        display: flex;
+                        flex-wrap: wrap;
+                        position: absolute;
+
+                        .point {
+                            width: 12.5%;
+                            height: 12.5%;
+                            outline: 0px solid $separator;
+                            position: relative;
+
+                            &:hover {
+
+                                &:before {
+                                    background-color: $blue;
+                                }
+                            }
+
+                            &:before {
+                                content: "";
+                                width: 100%;
+                                height: 100%;
+                                position: absolute;
+                                border: 0px solid $separator;
+                                top: 0%;
+                                left: 0%;
+                                transition: 0.5s all;
+                            }
+                        }
+
+                        .active {
+                            &:before {
+                                background-color: $red;
+                            }
+                        }
+                    }
+
+                    .point-data {
+                        display: flex;
+                        flex-direction: column;
+                        padding-top: 20px;
+                        margin-top: 10px;
+
+                        input {
+                            margin-top: 5px;
+                            margin-bottom: 20px;
+                            padding: 10px;
+                            border: 1px solid $separator;
+                        }
+                    }
+                }
+            }
+
+            .events-list {
+                width: 380px;
+                padding: 40px;
+
+                .title {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                .list {
+                    outline: 1px solid $separator;
+                    height: 613px;
+                    overflow: auto;
+
+                    .item {
+                        border-bottom: 1px solid $separator;
+                        display: flex;
+                        flex-direction: column;
+                        padding-left: 20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+
+                        p {
+                            padding: 5px;
+                            margin: 0px;
+                            font-weight: 900;
+                        }
+
+                        .zone {
+                            display: flex;
+
+                            .zone-x, .zone-y, .zone-height {
+                                display: flex;
+                                margin-left: 10px;
+                                
+                                p {
+                                    padding: 0px;
+                                    margin: 0px;
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .profile {
+            display: flex;
+            justify-content: space-around;
+
+            .admin-data {
+                width: 400px;
+                height: 700px;
+                padding: 40px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                .email {
+                    display: flex;
+
+                    p {
+                        margin-left: 20px;
+                        font-weight: 900;
+                    }
+                }
+
+                .login {
+                    display: flex;
+
+                    p {
+                        margin-left: 20px;
+                        font-weight: 900;
+                    }
+                }
+            }
+
+            .drons-list {
+                width: 400px;
+                height: 700px;
+                padding: 40px;
+                outline: 0px solid $separator;
+
+                .title {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                .list {
+                    width: 320px;
+                    height: 550px;
+                    outline: 1px solid $separator;
+
+                    .item {
+                        padding: 20px;
+                        cursor: pointer;
+                        transition: 0.5s all;
+
+                        &:hover {
+                            background-color: $blue;
+                            color: $white;
+                        }
+                    }
+                }
+
+                button {
+                    width: 100%;
+                    margin-top: 20px;
+                    padding: 10px;
+                    background-color: $blue;
+                    color: $white;
+                    border: 0px;
+                    transition: 0.5s all;
+
+                    &:hover {
+                        background-color: $blue-hover;
+                    }
+                }
             }
         }
     }
