@@ -6,6 +6,35 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+button {
+  background-color: #1782dd;
+  color: #ffffff;
+  border: 0px;
+  cursor: pointer;
+  transition: 0.5s all;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: #2893ee;
+}
+
+.checkbox {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox img {
+  height: 15px;
+  width: 15px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -176,17 +205,6 @@ body {
   border: 1px solid #cccccc;
 }
 
-.main .box-tabs .contents .content form button {
-  background-color: #1782dd;
-  color: #ffffff;
-  border: 0px;
-  transition: 0.5s all;
-}
-
-.main .box-tabs .contents .content form button:hover {
-  background-color: #2893ee;
-}
-
 .main .box-content {
   border-radius: 50px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -259,7 +277,7 @@ body {
 
 .main .box-content .content .users-list .list {
   outline: 1px solid #cccccc;
-  height: 550px;
+  height: 554px;
   overflow: auto;
 }
 
@@ -326,30 +344,62 @@ body {
 }
 
 .main .box-content .content .zone-data .zone .zone-map {
-  position: relative;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  transition: 1s background-color;
+}
+
+.main .box-content .content .zone-data .zone .zone-zoom {
+  width: 100% !important;
+  height: 100% !important;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 1s background-color;
+}
+
+.main .box-content .content .zone-data .zone .zone-zoom .points, .main .box-content .content .zone-data .zone .zone-zoom img {
+  width: 600px !important;
+  height: 600px !important;
+}
+
+.main .box-content .content .zone-data .zone .zone-points.zone-zoom {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.main .box-content .content .zone-data .zone .zone-points.zone-zoom span {
+  display: none;
 }
 
 .main .box-content .content .zone-data .zone .zone-points {
-  width: 300px;
-  height: 300px;
-  outline: 1px solid #cccccc;
-  display: flex;
-  flex-wrap: wrap;
   position: absolute;
+  transition: 1s background-color;
 }
 
-.main .box-content .content .zone-data .zone .zone-points .point {
+.main .box-content .content .zone-data .zone .zone-points .points {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #cccccc;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main .box-content .content .zone-data .zone .zone-points .points .point {
   width: 12.5%;
   height: 12.5%;
   outline: 0px solid #cccccc;
   position: relative;
 }
 
-.main .box-content .content .zone-data .zone .zone-points .point:hover:before {
-  background-color: #1782dd;
+.main .box-content .content .zone-data .zone .zone-points .points .point:hover:before {
+  outline: 10px solid #1782dd;
 }
 
-.main .box-content .content .zone-data .zone .zone-points .point:before {
+.main .box-content .content .zone-data .zone .zone-points .points .point:before {
   content: "";
   width: 100%;
   height: 100%;
@@ -364,18 +414,87 @@ body {
   background-color: #dc143c;
 }
 
+.main .box-content .content .zone-data .zone .zone-points:hover span {
+  width: 50px;
+  height: 100%;
+  right: -50px;
+}
+
+.main .box-content .content .zone-data .zone .zone-points:hover span p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main .box-content .content .zone-data .zone .zone-points:hover span img {
+  display: block;
+}
+
+.main .box-content .content .zone-data .zone .zone-points span {
+  position: absolute;
+  width: 0px;
+  height: 100%;
+  background-color: #ffffff;
+  right: 0px;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0px 0px 0px 0px;
+  border: 1px solid #cccccc;
+  transition: 0.5s all;
+}
+
+.main .box-content .content .zone-data .zone .zone-points span p {
+  display: none;
+  width: 100%;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+.main .box-content .content .zone-data .zone .zone-points span img {
+  width: 50%;
+  display: none;
+}
+
 .main .box-content .content .zone-data .zone .point-data {
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  margin-top: 10px;
+  margin-top: 310px;
 }
 
-.main .box-content .content .zone-data .zone .point-data input {
+.main .box-content .content .zone-data .zone .point-data .label {
   margin-top: 5px;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.main .box-content .content .zone-data .zone .point-data .label input {
   padding: 10px;
   border: 1px solid #cccccc;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.main .box-content .content .zone-data .zone .point-data .label input[type="checkbox"] {
+  display: none;
+}
+
+.main .box-content .content .zone-data .zone .point-data .label input:disabled {
+  background-color: #eeeeee;
+}
+
+.main .box-content .content .zone-data .zone .point-data .label button {
+  width: 100%;
+}
+
+.main .box-content .content .zone-data .zone .point-data .label:last-child {
+  margin: 0px;
 }
 
 .main .box-content .content .events-list {
@@ -391,7 +510,7 @@ body {
 
 .main .box-content .content .events-list .list {
   outline: 1px solid #cccccc;
-  height: 613px;
+  height: 623px;
   overflow: auto;
 }
 
@@ -423,6 +542,52 @@ body {
   padding: 0px;
   margin: 0px;
   margin-left: 5px;
+}
+
+.main .box-content .content .user-data {
+  width: 800px;
+  padding: 40px;
+}
+
+.main .box-content .content .user-data .title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.main .box-content .content .user-data .datepicker {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.main .box-content .content .user-data .datepicker input {
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  padding: 10px;
+  margin-left: 20px;
+}
+
+.main .box-content .content .user-data .list {
+  height: 550px;
+  overflow: auto;
+}
+
+.main .box-content .content .user-data .list table {
+  width: 100%;
+}
+
+.main .box-content .content .user-data .list table tr {
+  border-bottom: 1px solid #cccccc;
+}
+
+.main .box-content .content .user-data .list table tr th {
+  padding: 10px;
+}
+
+.main .box-content .content .user-data .list table tr td {
+  padding: 10px;
 }
 
 .main .box-content .profile {
@@ -489,17 +654,71 @@ body {
   color: #ffffff;
 }
 
+.main .box-content .profile .drons-list .list .qrcode-window {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .main .box-content .profile .drons-list button {
   width: 100%;
   margin-top: 20px;
-  padding: 10px;
-  background-color: #1782dd;
-  color: #ffffff;
-  border: 0px;
-  transition: 0.5s all;
 }
 
-.main .box-content .profile .drons-list button:hover {
-  background-color: #2893ee;
+.modal-window {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-window .window {
+  background-color: #ffffff;
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 50px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-window .window .title {
+  text-align: center;
+  font-weight: 900;
+}
+
+.modal-window .window .description {
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+.modal-window .window input {
+  padding: 10px;
+}
+
+.modal-window .window .buttons {
+  display: flex;
+}
+
+.modal-window .window .buttons button {
+  width: 150px !important;
+}
+
+.modal-window .window .buttons button:first-child {
+  margin-right: 20px;
 }
 /*# sourceMappingURL=style.css.map */

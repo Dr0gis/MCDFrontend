@@ -16,6 +16,35 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+button {
+    background-color: $blue;
+    color: $white;
+    border: 0px;
+    cursor: pointer;
+    transition: 0.5s all;
+    padding: 10px;
+
+    &:hover {
+        background-color: $blue-hover;
+    }
+}
+
+.checkbox {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    background-color: $white;
+    border: 1px solid $separator;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+        height: 15px;
+        width: 15px;
+    }
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -180,17 +209,6 @@ body {
                         background-color: $white;
                         border: 1px solid $separator;
                     }
-
-                    button {
-                        background-color: $blue;
-                        color: $white;
-                        border: 0px;
-                        transition: 0.5s all;
-
-                        &:hover {
-                            background-color: $blue-hover;
-                        }
-                    }
                 }
             }
         }
@@ -265,7 +283,7 @@ body {
 
                 .list {
                     outline: 1px solid $separator;
-                    height: 550px;
+                    height: 554px;
                     overflow: auto;
 
                     .item {
@@ -331,39 +349,71 @@ body {
                     flex-direction: column;
 
                     .zone-map {
-                        position: relative;
+                        position: absolute;
+                        width: 300px;
+                        height: 300px;
+                        transition: 1s background-color;
+                    }
+
+                    .zone-zoom {
+                        width: 100%!important;
+                        height: 100%!important;
+                        top: 0px;
+                        left: 0px;
+                        background-color: $black-alpha;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: 1s background-color;
+
+                        .points, img {
+                            width: 600px!important;
+                            height: 600px!important;
+                        }
+                    }
+
+                    .zone-points.zone-zoom {
+                        background-color: rgba($color: #ffffff, $alpha: 0.0);
+
+                        span {
+                            display: none;
+                        }
                     }
 
                     .zone-points {
-                        width: 300px;
-                        height: 300px;
-                        outline: 1px solid $separator;
-                        display: flex;
-                        flex-wrap: wrap;
                         position: absolute;
+                        transition: 1s background-color;
 
-                        .point {
-                            width: 12.5%;
-                            height: 12.5%;
-                            outline: 0px solid $separator;
-                            position: relative;
+                        .points {
+                            width: 300px;
+                            height: 300px;
+                            border: 1px solid $separator;
+                            display: flex;
+                            flex-wrap: wrap;
 
-                            &:hover {
-
-                                &:before {
-                                    background-color: $blue;
+                            .point {
+                                width: 12.5%;
+                                height: 12.5%;
+                                outline: 0px solid $separator;
+                                position: relative;
+    
+                                &:hover {
+    
+                                    &:before {
+                                        outline: 10px solid $blue;
+                                    }
                                 }
-                            }
-
-                            &:before {
-                                content: "";
-                                width: 100%;
-                                height: 100%;
-                                position: absolute;
-                                border: 0px solid $separator;
-                                top: 0%;
-                                left: 0%;
-                                transition: 0.5s all;
+    
+                                &:before {
+                                    content: "";
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    border: 0px solid $separator;
+                                    top: 0%;
+                                    left: 0%;
+                                    transition: 0.5s all;
+                                }
                             }
                         }
 
@@ -372,19 +422,95 @@ body {
                                 background-color: $red;
                             }
                         }
+
+                        &:hover {
+
+                            span {
+                                width: 50px;
+                                height: 100%;
+                                right: -50px;
+                                
+                                p {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                img {
+                                    display: block;
+                                }
+                            }
+                        }
+
+                        span {
+                            position: absolute;
+                            width: 0px;
+                            height: 100%;
+                            background-color: $white;
+                            right: 0px;
+                            top: 0px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-direction: column;
+                            border-radius: 0px 0px 0px 0px;
+                            border: 1px solid $separator;
+                            transition: 0.5s all;
+
+                            p {
+                                display: none;
+                                width: 100%;
+                                writing-mode: vertical-rl;
+                                text-orientation: upright;
+                                color: $white;
+                                margin-top: 10px;
+                            }
+
+                            img {
+                                width: 50%;
+                                display: none;
+                            }
+                        }
                     }
 
                     .point-data {
                         display: flex;
                         flex-direction: column;
                         padding-top: 20px;
-                        margin-top: 10px;
+                        margin-top: 310px;
 
-                        input {
+                        .label {
                             margin-top: 5px;
                             margin-bottom: 20px;
-                            padding: 10px;
-                            border: 1px solid $separator;
+                            display: flex;
+                            align-items: center;
+
+                            span {
+                                
+                            }
+
+                            input {
+                                padding: 10px;
+                                border: 1px solid $separator;
+                                width: 100%;
+                                margin-left: 10px;
+
+                                &[type="checkbox"] {
+                                    display: none;
+                                }
+
+                                &:disabled {
+                                    background-color: $disable;
+                                }
+                            }
+
+                            button {
+                                width: 100%;
+                            }
+
+                            &:last-child {
+                                margin: 0px;
+                            }
                         }
                     }
                 }
@@ -402,7 +528,7 @@ body {
 
                 .list {
                     outline: 1px solid $separator;
-                    height: 613px;
+                    height: 623px;
                     overflow: auto;
 
                     .item {
@@ -431,6 +557,52 @@ body {
                                     margin: 0px;
                                     margin-left: 5px;
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .user-data {
+                width: 800px;
+                padding: 40px;
+
+                .title {
+                    width: 100%;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+
+                .datepicker {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    margin-bottom: 20px;
+
+                    input {
+                        border: 1px solid $separator;
+                        background-color: $white;
+                        padding: 10px;
+                        margin-left: 20px;
+                    }
+                }
+
+                .list {
+                    height: 550px;
+                    overflow: auto;
+
+                    table {
+                        width: 100%;
+
+                        tr {
+                            border-bottom: 1px solid $separator;
+
+                            th {
+                                padding: 10px;
+                            }
+
+                            td {
+                                padding: 10px;
                             }
                         }
                     }
@@ -498,20 +670,78 @@ body {
                             color: $white;
                         }
                     }
+
+                    .qrcode-window {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-color: $black-alpha;
+                        top: 0px;
+                        left: 0px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 }
 
                 button {
                     width: 100%;
                     margin-top: 20px;
-                    padding: 10px;
-                    background-color: $blue;
-                    color: $white;
-                    border: 0px;
-                    transition: 0.5s all;
+                }
 
-                    &:hover {
-                        background-color: $blue-hover;
-                    }
+                .new-drone-modal {
+
+                }
+            }
+        }
+    }
+}
+
+.modal-window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $black-alpha;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .window {
+        background-color: $white;
+        padding: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-radius: 50px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .title {
+            text-align: center;
+            font-weight: 900;
+        }
+
+        .description {
+            text-align: center;
+            font-weight: 100;
+            margin-bottom: 10px;
+        }
+
+        input {
+            padding: 10px;
+        }
+
+        .buttons {
+            display: flex;
+
+            button {
+                width: 150px!important;
+
+                &:first-child {
+                    margin-right: 20px;
                 }
             }
         }

@@ -35,94 +35,116 @@
                 <div class="users-list">
                     <div class="title">Users list</div>
                     <input type="search" placeholder="Search">
-                    <list></list>
+                    <list-users></list-users>
                 </div>
                 <div class="zone-data" v-if="isZoneDataShow">
                     <div class="title">Forbidden zone</div>
                     <div class="zone">
-                        <div class="zone-map">
-                            <img id="zone-img" src="https://maps.googleapis.com/maps/api/staticmap?center=50.015271,36.227863&zoom=15&size=300x300&path=weight:3%7Ccolor:blue%7Cenc:{coaHnetiVjM??_SkM??~R&key=AIzaSyAfdWr8eiluFFBNtPGeMcv3CnLAOk76Wgs">
+                        <div :class="{'zone-map': true, 'zone-zoom': onZoneZoom}">
+                            <img id="zone-img" height="300" src="https://maps.googleapis.com/maps/api/staticmap?center=50.015271,36.227863&zoom=15&size=600x600&path=weight:3%7Ccolor:blue%7Cenc:{coaHnetiVjM??_SkM??~R&key=AIzaSyAfdWr8eiluFFBNtPGeMcv3CnLAOk76Wgs">
                         </div>
-                        <div class="zone-points">
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                        <div :class="{'zone-points': true, 'zone-zoom': onZoneZoom}" @click="unzoomMapsAndPoint">
+                            <span @click="zoomMapsAndPoint">
+                                <img src="images/search-black.png">
+                            </span>
+                            <div class="points">
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
 
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
-                            <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                                <div class="point"></div>
+                            </div>
                         </div>
                         <div class="point-data">
-                            <span>X</span>
-                            <input type="text" placeholder="X">
-                            <span>Y</span>
-                            <input type="text" placeholder="Y">
-                            <span>Height</span>
-                            <input type="text" placeholder="Height">
+                            <div class="label">
+                                <span>X</span>
+                                <input type="number" placeholder="X coordinate" readonly disabled>
+                            </div>
+                            <div class="label">
+                                <span>Y</span>
+                                <input type="number" placeholder="Y coordinate" readonly disabled>
+                            </div>
+                            <div class="label">
+                                <span>Height</span>
+                                <input type="number" placeholder="Min" :disabled="!isZoneForbidden" :value="heightZoneValue.min">
+                                <input type="number" placeholder="Max" :disabled="!isZoneForbidden" :value="heightZoneValue.max">
+                            </div>
+                            <div class="label">
+                                <span>Forbidden</span>
+                                <div class="checkbox" @click="checkBoxZoneFordibben">
+                                    <img src="images/ok-blue.png" v-show="isZoneForbidden"></img>
+                                </div>
+                                <input type="checkbox" placeholder="" v-model="isZoneForbidden">
+                            </div>
+                            <div class="label">
+                                <button>Save</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,27 +194,87 @@
                     </div>
                 </div>
                 <div class="user-data" v-if="isUserDataShow">
-
+                    <div class="title">User Violations</div>
+                    <div class="datepicker">
+                        <div><span>From</span><input type="date"></div>
+                        <div><span>To</span><input type="date"></div>
+                    </div>
+                    <div class="list">
+                        <table>
+                            <tr>
+                                <th>Date</th> <th>X</th> <th>Y</th> <th>Height</th>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                            <tr>
+                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="profile" v-if="isProfileShow">
                 <div class="admin-data">
                     <img src="images/avatar-default-icon.png" height="300px">
                     <div class="email">
-                        Email: <p id="admin-email">Email</p>
+                        Email: <p id="admin-email">{{adminEmail}}</p>
                     </div>
                     <div class="login">
-                        Login: <p id="admin-login">Login</p>
+                        Login: <p id="admin-login">{{adminLogin}}</p>
                     </div>
                 </div>
                 <div class="drons-list">
                     <div class="title">List drons</div>
-                    <div class="list">
-                        <div class="item">dron#0001</div>
-                        <div class="item">dron#0002</div>
-                        <div class="item">dron#0003</div>
+                    <list-drones></list-drones>
+                    <button @click="showNewDroneModal">Add new dron</button>
+                    <div class="modal-window new-drone-modal" v-if="isShowNewDroneModal">
+                        <div class="window">
+                            <div class="title">Do you want to add a new drone?</div>
+                            <div class="description">Enter a name</div>
+                            <input type="text" placeholder="Name" v-model="nameForCreateDrone">
+                            <div class="buttons">
+                                <button @click="addNewDron">Add</button>
+                                <button @click="hideNewDroneModal">Cancel</button>
+                            </div>
+                        </div>
                     </div>
-                    <button>Add new dron</button>
                 </div>
             </div>
         </div>
@@ -210,5 +292,6 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+    <script src="scripts/qrcode.js"></script>
     <script src="scripts/script.js"></script>
 </body>
