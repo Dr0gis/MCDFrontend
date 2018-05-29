@@ -35,6 +35,10 @@ button:hover {
   width: 15px;
 }
 
+.checkbox.disable {
+  background-color: #eeeeee;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -201,8 +205,11 @@ button:hover {
   width: 300px;
   padding: 10px;
   margin: 10px;
-  background-color: #ffffff;
   border: 1px solid #cccccc;
+}
+
+.main .box-tabs .contents .content form input {
+  background-color: #ffffff;
 }
 
 .main .box-content {
@@ -393,10 +400,12 @@ button:hover {
   height: 12.5%;
   outline: 0px solid #cccccc;
   position: relative;
+  transition: 0.25s all;
 }
 
 .main .box-content .content .zone-data .zone .zone-points .points .point:hover:before {
-  outline: 10px solid #1782dd;
+  outline: 5px solid #1782dd;
+  transition: 0.25s all;
 }
 
 .main .box-content .content .zone-data .zone .zone-points .points .point:before {
@@ -407,11 +416,21 @@ button:hover {
   border: 0px solid #cccccc;
   top: 0%;
   left: 0%;
-  transition: 0.5s all;
+  transition: 0.25s all;
+}
+
+.main .box-content .content .zone-data .zone .zone-points .active {
+  transition: 0.25s all;
+}
+
+.main .box-content .content .zone-data .zone .zone-points .active:hover:before {
+  outline: 5px solid #9acd32 !important;
+  transition: 0.25s all;
 }
 
 .main .box-content .content .zone-data .zone .zone-points .active:before {
-  background-color: #dc143c;
+  outline: 3px solid #9acd32 !important;
+  transition: 0.25s all;
 }
 
 .main .box-content .content .zone-data .zone .zone-points:hover span {
@@ -664,6 +683,11 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.main .box-content .profile .drons-list .list .qrcode-window #qrcode {
+  padding: 20px;
+  background-color: #ffffff;
 }
 
 .main .box-content .profile .drons-list button {

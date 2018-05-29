@@ -1,6 +1,7 @@
 $white: #ffffff;
 $blue: #1782dd;
 $blue-hover: #2893ee;
+$yellowgreen: #9acd32;
 $red: #dc143c;
 $separator: #cccccc;
 $disable: #eeeeee;
@@ -42,6 +43,10 @@ button {
     img {
         height: 15px;
         width: 15px;
+    }
+
+    &.disable {
+        background-color: $disable;
     }
 }
 
@@ -206,8 +211,11 @@ button {
                         width: 300px;
                         padding: 10px;
                         margin: 10px;
-                        background-color: $white;
                         border: 1px solid $separator;
+                    }
+
+                    input {
+                        background-color: $white;
                     }
                 }
             }
@@ -396,11 +404,13 @@ button {
                                 height: 12.5%;
                                 outline: 0px solid $separator;
                                 position: relative;
+                                transition: 0.25s all;
     
                                 &:hover {
     
                                     &:before {
-                                        outline: 10px solid $blue;
+                                        outline: 5px solid $blue;
+                                        transition: 0.25s all;
                                     }
                                 }
     
@@ -412,14 +422,25 @@ button {
                                     border: 0px solid $separator;
                                     top: 0%;
                                     left: 0%;
-                                    transition: 0.5s all;
+                                    transition: 0.25s all;
                                 }
                             }
                         }
 
                         .active {
+                            transition: 0.25s all;
+
+                            &:hover {
+    
+                                &:before {
+                                    outline: 5px solid $yellowgreen!important;
+                                    transition: 0.25s all;
+                                }
+                            }
+
                             &:before {
-                                background-color: $red;
+                                outline: 3px solid $yellowgreen!important;
+                                transition: 0.25s all;
                             }
                         }
 
@@ -681,6 +702,11 @@ button {
                         display: flex;
                         justify-content: center;
                         align-items: center;
+
+                        #qrcode {
+                            padding: 20px;
+                            background-color: $white
+                        }
                     }
                 }
 

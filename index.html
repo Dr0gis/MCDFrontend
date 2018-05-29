@@ -48,120 +48,52 @@
                                 <img src="images/search-black.png">
                             </span>
                             <div class="points">
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
-                                <div class="point"></div>
+                                <div v-for="(item, index) in 64" :key="item" :class="{point: true, active: selectedZonePoint == index}" @click="selectZonePoint(index)"></div>
                             </div>
                         </div>
                         <div class="point-data">
-                            <div class="label">
-                                <span>X</span>
-                                <input type="number" placeholder="X coordinate" readonly disabled>
-                            </div>
-                            <div class="label">
-                                <span>Y</span>
-                                <input type="number" placeholder="Y coordinate" readonly disabled>
-                            </div>
-                            <div class="label">
-                                <span>Height</span>
-                                <input type="number" placeholder="Min" :disabled="!isZoneForbidden" :value="heightZoneValue.min">
-                                <input type="number" placeholder="Max" :disabled="!isZoneForbidden" :value="heightZoneValue.max">
-                            </div>
-                            <div class="label">
-                                <span>Forbidden</span>
-                                <div class="checkbox" @click="checkBoxZoneFordibben">
-                                    <img src="images/ok-blue.png" v-show="isZoneForbidden"></img>
+                            <form @submit.prevent="saveZonePoint">
+                                <div class="label">
+                                    <span>X</span>
+                                    <input type="number" placeholder="X coordinate" v-model="pointZoneValue.x" readonly disabled>
                                 </div>
-                                <input type="checkbox" placeholder="" v-model="isZoneForbidden">
-                            </div>
-                            <div class="label">
-                                <button>Save</button>
-                            </div>
+                                <div class="label">
+                                    <span>Y</span>
+                                    <input type="number" placeholder="Y coordinate" v-model="pointZoneValue.y" readonly disabled>
+                                </div>
+                                <div class="label">
+                                    <span>Height</span>
+                                    <input type="number" placeholder="Min" :disabled="!isZoneForbidden" v-model="pointZoneValue.minHeight">
+                                    <input type="number" placeholder="Max" :disabled="!isZoneForbidden" v-model="pointZoneValue.maxHeight" :min="pointZoneValue.minHeight">
+                                </div>
+                                <div class="label">
+                                    <span>Forbidden</span>
+                                    <div :class="{checkbox: true, disable: selectedZonePoint == -1}" @click="checkBoxZoneFordibben">
+                                        <img src="images/ok-blue.png" v-show="isZoneForbidden"></img>
+                                    </div>
+                                </div>
+                                <div class="label">
+                                    <button type="submit">Save</button>
+                                    <button @click="clearZonePoints" style="display: none;">Clear</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div class="events-list" v-if="isEventListShow">
                     <div class="title">Events</div>
                     <div class="list">
-                        <div class="item">
-                            <div class="user">User: <p id="event-user">user@mail.com</p></div>
+                        <div v-for="item in eventsList" class="item">
+                            <div class="user">User: <p id="event-user">{{item.userEmail}}</p></div>
                             <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
                             <div class="zone">
                                 Zone: 
-                                <div class="zone-x">X: <p id="event-zone-x">10</p></div>
-                                <div class="zone-y">Y: <p id="event-zone-x">20</p></div>
-                                <div class="zone-height">Height: <p id="event-zone-height">100m</p></div>
+                                <div class="zone-x">X: <p id="event-zone-x">{{item.x}}</p></div>
+                                <div class="zone-y">Y: <p id="event-zone-x">{{item.y}}</p></div>
+                                <div class="zone-height">Height: <p id="event-zone-height">{{item.height}}m</p></div>
                             </div>
                         </div>
-                        <div class="item">
+                        <!--<div class="item">
                             <div class="user">User: <p id="event-user">user1@mail.com</p></div>
                             <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
                             <div class="zone">
@@ -182,15 +114,15 @@
                             </div>
                         </div>
                         <div class="item">
-                                <div class="user">User: <p id="event-user">user1@mail.com</p></div>
-                                <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
-                                <div class="zone">
-                                    Zone: 
-                                    <div class="zone-x">X: <p id="event-zone-x">10</p></div>
-                                    <div class="zone-y">Y: <p id="event-zone-x">20</p></div>
-                                    <div class="zone-height">Height: <p id="event-zone-height">100m</p></div>
-                                </div>
+                            <div class="user">User: <p id="event-user">user1@mail.com</p></div>
+                            <div class="dron">Dron: <p id="event-dron">dron#1234</p></div>
+                            <div class="zone">
+                                Zone: 
+                                <div class="zone-x">X: <p id="event-zone-x">10</p></div>
+                                <div class="zone-y">Y: <p id="event-zone-x">20</p></div>
+                                <div class="zone-height">Height: <p id="event-zone-height">100m</p></div>
                             </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="user-data" v-if="isUserDataShow">
@@ -204,47 +136,8 @@
                             <tr>
                                 <th>Date</th> <th>X</th> <th>Y</th> <th>Height</th>
                             </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
-                            </tr>
-                            <tr>
-                                <td>12.05.2018 11:29</td> <td>10</td> <td>20</td> <td>300</td>
+                            <tr v-for="item in userOffenceDroneMovements">
+                                <td>{{item.Datetime}}</td> <td>{{item.x}}</td> <td>{{item.y}}</td> <td>{{item.height}}</td>
                             </tr>
                         </table>
                     </div>

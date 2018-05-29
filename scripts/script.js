@@ -1,24 +1,7 @@
-/*function getStatisticsRequest() {
-    var url = serverUrl + 'Statistics';
-    var request = $.ajax({
-        type: 'GET',
-        data: {
-            param1: "param1",
-            param2: 2
-        },
-        url: url,
-        success: function(result) {
-            console.log('Statistics done');
-            console.log(result);
-        },
-        error: function() {
-            console.log('Statistics error');
-        }
-    });
-}*/
-
-var serverUrl = 'http://localhost:9000/';
+var serverUrl = 'http://192.168.31.168:9000/';
 var googleMapsApiKey = 'AIzaSyAfdWr8eiluFFBNtPGeMcv3CnLAOk76Wgs';
+
+/*----------          REQUESTS          ----------*/
 
 function registrationRequest(email, login, password) {
     showProgress()
@@ -85,9 +68,9 @@ function getAdminInfo(token) {
     });
 }
 
-function getStatisticsRequest(token) {
+function getUsersListRequest(token) {
     showProgress();
-    var url = serverUrl + 'Statistics';
+    var url = serverUrl + 'UsersList';
     var request = $.ajax({
         type: 'GET',
         data: {
@@ -95,13 +78,58 @@ function getStatisticsRequest(token) {
         },
         url: url,
         success: function(result) {
-            console.log('Statistics done');
+            console.log('UsersList done');
             console.log(result);
             formUserList(result);
             hideProgress();
         },
         error: function() {
+            console.log('UsersList error');
+            hideProgress();
+        }
+    });
+}
+
+function getStatisticsRequest(token, userEmail) {
+    showProgress();
+    var url = serverUrl + 'Statistics';
+    var request = $.ajax({
+        type: 'GET',
+        data: {
+            token: token,
+            emailUser: userEmail
+        },
+        url: url,
+        success: function(result) {
+            console.log('Statistics done');
+            console.log(result);
+            formUserOffenceDroneMovements(result);
+            hideProgress();
+        },
+        error: function() {
             console.log('Statistics error');
+            hideProgress();
+        }
+    });
+}
+
+function getEventsRequest(token) {
+    showProgress();
+    var url = serverUrl + 'Events';
+    var request = $.ajax({
+        type: 'GET',
+        data: {
+            token: token,
+        },
+        url: url,
+        success: function(result) {
+            console.log('Events done');
+            console.log(result);
+            formEventsList(result);
+            hideProgress();
+        },
+        error: function() {
+            console.log('Events error');
             hideProgress();
         }
     });
@@ -150,10 +178,74 @@ function addNewDroneRequest(token, name) {
     });
 }
 
+function getZonePointsRequest(token) {
+    showProgress();
+    var url = serverUrl + 'ZonePoints';
+    var request = $.ajax({
+        type: 'GET',
+        data: {
+            token: token
+        },
+        url: url,
+        success: function(result) {
+            console.log('ZonePoints done');
+            console.log(result);
+            listZonePoints = result;
+            hideProgress();
+        },
+        error: function() {
+            console.log('ZonePoints error');
+            hideProgress();
+        }
+    });
+}
+
+function clearZonePointsRequest(token) {
+    showProgress();
+    var url = serverUrl + 'ClearZonePoints';
+    var request = $.ajax({
+        type: 'POST',
+        data: JSON.stringify({token: token}),
+        url: url,
+        contentType: 'application/json',
+        success: function(result) {
+            console.log('ClearZonePoints done');
+            console.log(result);
+            hideProgress();
+        },
+        error: function() {
+            console.log('ClearZonePoints error');
+            hideProgress();
+        }
+    });
+}
+
+function updateZonePointsRequest(token, id, minHeight, maxHeight, forbidden) {
+    showProgress();
+    var url = serverUrl + 'UpdateZonePoints';
+    var request = $.ajax({
+        type: 'PUT',
+        data: JSON.stringify({token: token, id: Number.parseInt(id), minHeight: Number.parseInt(minHeight), maxHeight: Number.parseInt(maxHeight), forbidden: forbidden}),
+        url: url,
+        contentType: 'application/json',
+        success: function(result) {
+            console.log('UpdateZonePoints done');
+            console.log(result);
+            hideProgress();
+            getZonePointsRequest(getToken());
+        },
+        error: function() {
+            console.log('UpdateZonePoints error');
+            hideProgress();
+        }
+    });
+}
+
+/*----------          GLOBAL          ----------*/
+
 function showProgress() {
     progress.isShow = true;
 }
-
 function hideProgress() {
     setTimeout('progress.isShow = false', 500);
 }
@@ -161,11 +253,9 @@ function hideProgress() {
 function saveToken(token) {
     sessionStorage.setItem('token', token);
 }
-
 function getToken() {
     return sessionStorage.getItem('token');
 }
-
 function removeToken() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('email');
@@ -176,14 +266,14 @@ function saveAdminInfo(email, login) {
     sessionStorage.setItem('email', email);
     sessionStorage.setItem('login', login);
 }
-
 function getAdminEmail() {
     return sessionStorage.getItem('email');
 }
-
 function getAdminLogin() {
     return sessionStorage.getItem('login');
 }
+
+/*----------          VUE          ----------*/
 
 var progress = new Vue({
     el: '#progress',
@@ -271,6 +361,7 @@ var boxRegAuth = new Vue({
     }
 });
 
+
 var fullListDrones = [];
 function formDronesList(drones) {
     fullListDrones = drones;
@@ -305,6 +396,12 @@ Vue.component('list-drones', {
             function create(index) {
                 qrcode = new QRCode(document.getElementById("qrcode"));
                 qrcode.makeCode(fullListDrones[index].qrcode);
+
+                var socket = new WebSocket('ws://192.168.31.168:9000/ConnectionWithDrones?qrcode=lvvg-yf7ojGPYaQsL-2kEnjNix5H5U-zT5_Us-EtAo4=');
+                // Message received on the socket
+                socket.onmessage = function(event) {
+                    console.log(JSON.parse(event.data));
+                };
             }
 
             setTimeout(create, 50, index);
@@ -317,6 +414,7 @@ Vue.component('list-drones', {
         }
     }
 });
+
 
 function formUserList(statistics) {
     listUsers.items.splice(0,  listUsers.items.length);
@@ -347,10 +445,30 @@ Vue.component('list-users', {
                 return;
             }
             this.active = index;
+            getStatisticsRequest(getToken(), listUsers.items[index]);
             showUserData();
         }
     }
 });
+
+
+var listZonePoints;
+
+var userOffenceDroneMovements = [];
+function formUserOffenceDroneMovements(droneMovements) {
+    userOffenceDroneMovements.splice(0,  userOffenceDroneMovements.length);
+    for (var i = 0; i < droneMovements.length; i++) {
+        userOffenceDroneMovements.push(droneMovements[i]);
+    }
+}
+
+var eventsList = [];
+function formEventsList(events) {
+    eventsList.splice(0,  eventsList.length);
+    for (var i = 0; i < events.length; i++) {
+        eventsList.push(events[i]);
+    }
+}
 
 var mainContent = new Vue({
     el: '#main-content',
@@ -365,12 +483,17 @@ var mainContent = new Vue({
         isShowNewDroneModal: false,
         nameForCreateDrone: '',
         isZoneForbidden: false,
-        heightZoneValue: {
-            min: '',
-            max: ''
+        pointZoneValue: {
+            x: '',
+            y: '',
+            minHeight: '',
+            maxHeight: '',
         },
         onZoneZoom: false,
-        tempZoom: false
+        tempZoom: false,
+        selectedZonePoint: -1,
+        userOffenceDroneMovements: userOffenceDroneMovements,
+        eventsList: eventsList
     },
     methods: {
         logOut: function () {
@@ -394,7 +517,9 @@ var mainContent = new Vue({
             this.nameForCreateDrone = '';
         },
         checkBoxZoneFordibben: function () {
-            this.isZoneForbidden = !this.isZoneForbidden;
+            if (this.selectedZonePoint != -1) {
+                this.isZoneForbidden = !this.isZoneForbidden;
+            }
         },
         zoomMapsAndPoint: function () {
             this.onZoneZoom = true;
@@ -405,6 +530,36 @@ var mainContent = new Vue({
             if (!this.tempZoom) {
                 this.onZoneZoom = false;
             }
+        },
+        selectZonePoint: function (index) {
+            if (this.selectedZonePoint == index) {
+                this.selectedZonePoint = -1;
+                return;
+            }
+            this.selectedZonePoint = index;
+            this.pointZoneValue.x = listZonePoints[index].x;
+            this.pointZoneValue.y = listZonePoints[index].y;
+            this.isZoneForbidden = listZonePoints[index].forbidden;
+            if (this.isZoneForbidden) {
+                this.pointZoneValue.minHeight = listZonePoints[index].minHeight;
+                this.pointZoneValue.maxHeight = listZonePoints[index].maxHeight;
+            }
+        },
+        getZonePoints: function () {
+            getZonePointsRequest(getToken());
+        },
+        clearZonePoints: function () {
+            clearZonePointsRequest(getToken());
+        },
+        saveZonePoint: function () {
+            var minHeight = this.pointZoneValue.minHeight;
+            var maxHeight = this.pointZoneValue.maxHeight;
+            if (!this.isZoneForbidden) {
+                minHeight = listZonePoints[this.selectedZonePoint].minHeight;
+                maxHeight = listZonePoints[this.selectedZonePoint].maxHeight;
+            }
+            updateZonePointsRequest(getToken(), listZonePoints[this.selectedZonePoint].id, minHeight, maxHeight, this.isZoneForbidden);
+            this.selectedZonePoint = -1;
         }
     },
     computed: {
@@ -417,9 +572,20 @@ var mainContent = new Vue({
     },
     watch: {
         isZoneForbidden: function () {
-            if (!this.isZoneForbidden) {
-                this.heightZoneValue.min = '';
-                this.heightZoneValue.max = '';
+            if (this.isZoneForbidden) {
+                this.pointZoneValue.minHeight = listZonePoints[this.selectedZonePoint].minHeight;
+                this.pointZoneValue.maxHeight = listZonePoints[this.selectedZonePoint].maxHeight;
+            }
+            else {
+                this.pointZoneValue.minHeight = '';
+                this.pointZoneValue.maxHeight = '';
+            }
+        },
+        selectedZonePoint: function () {
+            if (this.selectedZonePoint == -1) {
+                this.pointZoneValue.x = '';
+                this.pointZoneValue.y = '';
+                this.isZoneForbidden = false;
             }
         }
     }
@@ -428,7 +594,9 @@ var mainContent = new Vue({
 function showMainContent() {
     boxRegAuth.isShow = false;
     mainContent.isShow = true;
-    getStatisticsRequest(getToken());
+    getUsersListRequest(getToken());
+    getZonePointsRequest(getToken());
+    getEventsRequest(getToken());
 }
 
 function showBoxRegAuth() {
@@ -440,7 +608,7 @@ function showContent() {
     mainContent.isContentShow = true;
     mainContent.isProfileShow = false;
     mainContent.indexActiveTitle = 1;
-    getStatisticsRequest(getToken());
+    getUsersListRequest(getToken());
 }
 
 function showProfile() {
@@ -461,6 +629,9 @@ function hideUserData() {
     mainContent.isZoneDataShow = true;
     mainContent.isEventListShow = true;
 }
+
+
+/*----------          MAIN          ----------*/
 
 function startApp() {
     token = getToken();
